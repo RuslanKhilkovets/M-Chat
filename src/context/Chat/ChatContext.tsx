@@ -1,10 +1,10 @@
 import { createContext, useCallback, useEffect, useState } from 'react';
-import { baseUrl, getRequest, postRequest } from '../utils/services';
+import { baseUrl, getRequest, postRequest } from '../../helpers/services';
 import { io } from 'socket.io-client';
 
 export const ChatContext = createContext();
 
-export const ChatContextProvider = ({ children, user }) => {
+export const ChatProvider = ({ children, user }) => {
   const [userChats, setUserChats] = useState(null);
   const [isUserChatLoading, setIsUserChatLoading] = useState(false);
   const [userChatsError, setUserChatsError] = useState(null);
@@ -32,7 +32,7 @@ export const ChatContextProvider = ({ children, user }) => {
   }, [user]);
 
   useEffect(() => {
-    if (socket === null) return;
+    if (socket === null) {return;}
 
     socket.emit('addNewUser', user?._id);
 
@@ -46,7 +46,7 @@ export const ChatContextProvider = ({ children, user }) => {
   }, [socket]);
 
   useEffect(() => {
-    if (currentChat === null) return;
+    if (currentChat === null) {return;}
 
     const recipientId = currentChat?.members.find(id => id !== user?._id);
 
@@ -54,10 +54,10 @@ export const ChatContextProvider = ({ children, user }) => {
   }, [newMessage]);
 
   useEffect(() => {
-    if (currentChat === null) return;
+    if (currentChat === null) {return;}
 
     socket.on('getMessage', res => {
-      if (currentChat?._id !== res.chatId) return;
+      if (currentChat?._id !== res.chatId) {return;}
 
       setMessages(prev => [...prev, res]);
     });
@@ -90,7 +90,7 @@ export const ChatContextProvider = ({ children, user }) => {
 
       const pChats = response.users.filter(u => {
         let isChatCreated = false;
-        if (user?._id === u.id) return false;
+        if (user?._id === u.id) {return false;}
 
         if (userChats) {
           isChatCreated = userChats?.some(chat => {
