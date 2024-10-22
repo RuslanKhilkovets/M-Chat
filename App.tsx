@@ -2,12 +2,15 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import {enableScreens} from 'react-native-screens';
 
 import {Navigation} from '@/navigation';
 import {ChatProvider} from '@/context/Chat/ChatContext';
 import {AuthProvider} from '@/context/Auth/AuthContext';
 import {ThemeProvider} from '@/context/Theme/ThemeContext';
 import store from './src/store';
+
+enableScreens();
 
 if (__DEV__) {
   require('./ReactotronConfig');
@@ -46,24 +49,5 @@ function App(): React.JSX.Element {
     </QueryClientProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;

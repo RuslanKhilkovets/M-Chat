@@ -4,8 +4,6 @@ import jwt_decode from 'jwt-decode';
 import {useDispatch} from 'react-redux';
 
 import {delCache} from '@/helpers';
-import {resetUser, setUser} from '@/store/user';
-import {Api} from '@/api';
 
 export const AuthContext = React.createContext();
 
@@ -49,13 +47,11 @@ export const AuthProvider = ({children}) => {
     await SInfo.setItem('user', JSON.stringify(userData), {
       sharedPreferencesName: 'mySharedPrefs',
       keychainService: 'myKeychain',
-    }).then(() => {
-      dispatch(setUser(userData));
     });
   };
 
   const logout = async () => {
-    await Api.auth.logout();
+    //  await Api.auth.logout();
 
     await SInfo.deleteItem('accessToken', {
       sharedPreferencesName: 'mySharedPrefs',
@@ -65,7 +61,7 @@ export const AuthProvider = ({children}) => {
     await SInfo.deleteItem('user', {
       sharedPreferencesName: 'mySharedPrefs',
       keychainService: 'myKeychain',
-    }).then(() => dispatch(resetUser()));
+    });
 
     await delCache('progress');
   };
