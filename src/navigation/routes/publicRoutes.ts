@@ -1,11 +1,11 @@
 import {StartScreen} from '@/screens';
 import {IRoute} from '@/types';
 
-export const publivRoutes: IRoute[] = [
+export const publicRoutes: IRoute[] = [
   {
     name: 'Start',
     component: StartScreen,
   },
 ];
 
-export default publivRoutes;
+export default publicRoutes;

@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const [isAuth, setIsAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const {accessToken} = useContext(AuthContext);
   const dispatch = useDispatch();
 

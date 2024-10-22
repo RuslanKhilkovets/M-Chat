@@ -21,8 +21,6 @@ export const ChatProvider = ({children, user}) => {
   const [notifications, setNotifications] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
 
-  console.log('notifications', notifications);
-
   useEffect(() => {
     const newSocket = io(SOCKET_URL);
     setSocket(newSocket);
