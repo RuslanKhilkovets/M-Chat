@@ -5,13 +5,13 @@ import {themes} from '@/context';
 interface ThemeContextProps {
   colorScheme: 'light' | 'dark';
   setColorScheme: (value: 'light' | 'dark') => void;
-  themes: any;
+  theme: any;
 }
 
 const ThemeContext = createContext<ThemeContextProps>({
   colorScheme: 'light',
   setColorScheme: () => {},
-  themes,
+  theme: [],
 });
 
 export const useTheme = () => useContext(ThemeContext);
@@ -32,7 +32,7 @@ export const ThemeProvider = ({children}: React.PropsWithChildren) => {
       value={{
         colorScheme,
         setColorScheme,
-        themes,
+        theme: themes,
       }}>
       {children}
     </ThemeContext.Provider>

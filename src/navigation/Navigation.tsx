@@ -21,18 +21,18 @@ const Navigation = () => {
 
   const getToken = async () => {
     const accessToken = await SInfo.getItem('accessToken', {
-      sharedPreferencesName: 'mySharedPrefs',
-      keychainService: 'myKeychain',
+      sharedPreferencesName: 'prefs',
+      keychainService: 'keychainService',
     });
     return accessToken;
   };
 
   const getUser = async () => {
     const user = await SInfo.getItem('user', {
-      sharedPreferencesName: 'mySharedPrefs',
-      keychainService: 'myKeychain',
+      sharedPreferencesName: 'prefs',
+      keychainService: 'keychainService',
     });
-    return JSON.parse(user);
+    return user && JSON.parse(user);
   };
 
   useEffect(() => {
@@ -74,7 +74,7 @@ const Navigation = () => {
         translucent
       />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Start">
           {!!isAuth
             ? privateRoutes.map((route: IRoute) => (
                 <Stack.Screen

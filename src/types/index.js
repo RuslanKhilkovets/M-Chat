@@ -1,17 +1,2 @@
-export {default as ISignData} from './ISignData';
-export {default as IRegisterData} from './IRegisterData';
 export {default as IModalProps} from './IModalProps';
-export {default as IItem} from './IItem';
-export {default as IUser} from './IUser';
-export {default as ICategory} from './ICategory';
-export {default as IMessage} from './IMessage';
-export {default as IPicture} from './IPicture';
-export {default as IImage} from './IImage';
-export {default as ILocation} from './ILocation';
-export {default as IAddItemFormData} from './IAddItemFormData';
-export {default as IProfileData} from './IProfileData';
-export {default as TRouteNames} from './TRouteNames';
 export {default as IRoute} from './IRoute';
-export {default as IPhoto} from './IPhoto';
-export {default as IPostItem} from './IPostItem';
-export {default as IFilters} from './IFilters';
