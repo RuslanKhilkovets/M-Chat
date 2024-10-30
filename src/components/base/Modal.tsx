@@ -89,13 +89,10 @@ const Modal = ({
                 width: '100%',
                 flexDirection: 'row',
               }}>
-              <Text
-                style={[styles.modalTitle, {color: theme[colorScheme].dark}]}>
-                {title}
-              </Text>
+              <Text style={[styles.modalTitle]}>{title}</Text>
 
               <TouchableOpacity onPress={onClose} style={[styles.closeIcon]}>
-                <AppIcon name="delete_filter" />
+                <AppIcon name="delete_filter" color="#E1FF00" />
               </TouchableOpacity>
             </View>
           </Animated.View>
@@ -118,7 +115,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     height: '100%',
-    backgroundColor: 'white',
+    backgroundColor: '#000',
+    color: '#E1FF00',
   },
   modalHeader: {
     flexDirection: 'row',
@@ -129,10 +127,11 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     width: '100%',
-    fontSize: 22,
-    fontFamily: 'Raleway-Semibold',
+    fontSize: 2,
+    fontFamily: 'Jersey20-Regular',
     textAlign: 'center',
     lineHeight: 26,
+    color: '#E1FF00',
   },
   closeIcon: {
     position: 'absolute',

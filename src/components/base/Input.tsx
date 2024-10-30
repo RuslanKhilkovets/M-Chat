@@ -8,7 +8,6 @@ import {
   TextStyle,
   TouchableOpacity,
 } from 'react-native';
-import {TextInputMask} from 'react-native-masked-text';
 
 import {AppIcon} from '@/components';
 import {useTheme} from '@/context/Theme/ThemeContext';
@@ -25,8 +24,6 @@ interface IInputProps {
   error?: string;
   errorStyle?: TextStyle;
   disabled?: boolean;
-  mask?: string;
-  maskOptions?: Record<string, any>;
   maxLength?: number;
   searchMode?: boolean;
   endAdornment?: React.JSX.Element | null;
@@ -52,8 +49,6 @@ const Input: React.FC<IInputProps> = ({
   labelStyle,
   error,
   disabled = false,
-  mask,
-  maskOptions,
   maxLength,
   searchMode,
   endAdornment,
@@ -82,64 +77,36 @@ const Input: React.FC<IInputProps> = ({
           disabled && styles.disabled,
           multiline && {height: numberOfLines * 25},
         ]}>
-        {mask ? (
-          <TextInputMask
-            placeholderTextColor={theme[colorScheme].dark}
-            type={'custom'}
-            options={{
-              mask,
-              ...maskOptions,
-            }}
-            value={value}
-            onChangeText={onChangeText}
-            placeholder={placeholder}
-            editable={!disabled}
-            maxLength={maxLength}
-            numberOfLines={numberOfLines}
-            multiline={multiline}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            keyboardType={keyboardType}
-            style={[
-              styles.input,
-              inputStyle,
-              isFocused && styles.activeInput,
-              disabled && styles.disabled,
-              {color: theme[colorScheme].dark},
-            ]}
-          />
-        ) : (
-          <TextInput
-            placeholderTextColor={theme[colorScheme].dark}
-            ref={ref}
-            textAlignVertical="top"
-            value={value}
-            onChangeText={onChangeText}
-            placeholder={placeholder}
-            secureTextEntry={showPassword}
-            editable={!disabled}
-            maxLength={maxLength}
-            numberOfLines={numberOfLines}
-            multiline={multiline}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-            keyboardType={keyboardType}
-            style={[
-              styles.input,
-              inputStyle,
-              multiline && {height: numberOfLines * 20},
-              {color: theme[colorScheme].dark},
-            ]}
-          />
-        )}
+        <TextInput
+          ref={ref}
+          textAlignVertical="top"
+          value={value}
+          onChangeText={onChangeText}
+          placeholder={placeholder}
+          secureTextEntry={showPassword}
+          editable={!disabled}
+          maxLength={maxLength}
+          numberOfLines={numberOfLines}
+          multiline={multiline}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          keyboardType={keyboardType}
+          style={[
+            styles.input,
+            inputStyle,
+            multiline && {height: numberOfLines * 20},
+            disabled && styles.disabled,
+            error && styles.errorText,
+          ]}
+        />
         {endAdornment && (
           <View style={styles.endAdornment}>{endAdornment}</View>
         )}
-        {secureTextEntry && !mask && (
+        {secureTextEntry && (
           <TouchableOpacity
             style={styles.endAdornment}
             onPress={handleTogglePasswordVisibility}>
-            <AppIcon name={!showPassword ? 'hide' : 'see'} />
+            <AppIcon name={!showPassword ? 'hide' : 'see'} color="#E1FF00" />
           </TouchableOpacity>
         )}
         {searchMode && (
@@ -166,24 +133,25 @@ const styles = StyleSheet.create({
     position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 10,
-    paddingHorizontal: 15,
-    backgroundColor: '#fff',
+    borderRadius: 24,
+    paddingHorizontal: 25,
     height: 60,
-    borderColor: '#e7e7e7',
+    borderColor: '#424242',
     borderWidth: 1,
+    backgroundColor: '#1e1e1e',
   },
   input: {
     flex: 1,
-    fontSize: 16,
-    fontFamily: 'Jersey',
-    color: '#000',
+    fontSize: 20,
+    fontFamily: 'Jersey20-Regular',
+    color: '#E1FF00',
   },
   activeInput: {
     borderColor: '#000',
   },
   error: {
     borderColor: '#FF0000',
+    color: '#FF0000',
   },
   errorText: {
     color: '#ff0000',

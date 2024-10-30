@@ -84,12 +84,13 @@ const styles = StyleSheet.create({
   },
   secondary: {
     backgroundColor: 'transparent',
+    fontSize: 20,
   },
   light: {
     backgroundColor: '#F8F6F6',
   },
   buttonText: {
-    fontSize: 24,
+    fontSize: 22,
     color: '#E1FF00',
     fontFamily: 'Jersey20-Regular',
   },
