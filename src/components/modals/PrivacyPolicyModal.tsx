@@ -7,14 +7,13 @@ import {IModalProps} from '@/types';
 const typingSpeed = 1;
 const cursorBlinkSpeed = 500;
 
-const AboutModal = ({visible, onClose, openFrom}: IModalProps) => {
+const PrivacyPoliceModal = ({visible, onClose, openFrom}: IModalProps) => {
   const fullText =
-    '    Welcome to MChat – your secure, privacy-focused messaging app designed to keep your conversations safe and private. ' +
-    'MChat leverages state-of-the-art end-to-end encryption to ensure that only you and the intended recipients can access your messages, calls, and shared files. ' +
-    'From sensitive business communications to personal messages, MChat’s multi-layered security protocols are built to protect your data from any unauthorized access or interception. ' +
-    'With MChat, you have complete control over your digital footprint. \n    Features like self-destructing messages allow you to set time limits on sensitive conversations, ' +
-    'while screenshot protection and screen lock options add an extra layer of privacy. MChat’s secure cloud storage lets you save your conversations without compromising security, ' +
-    'and only you can retrieve them through multi-factor authentication and biometric access.';
+    '    MChat is committed to protecting your privacy. Our app uses end-to-end encryption to ensure that your messages, calls, and shared media remain secure and accessible only to you and your intended recipients. ' +
+    'We do not store or share your private data, and we provide additional security features like multi-factor authentication and biometric access to keep your information safe. ' +
+    'Our policies ensure that no data is shared with third parties without your consent, and we give you full control over your personal information. For added protection, MChat offers features like self-destructing messages and screen lock options to safeguard your conversations. ' +
+    'Your security is our priority, and we are committed to maintaining a safe environment for your personal and professional communications.';
+
   const [displayedText, setDisplayedText] = useState('');
   const [cursorVisible, setCursorVisible] = useState(true);
 
@@ -59,7 +58,7 @@ const AboutModal = ({visible, onClose, openFrom}: IModalProps) => {
   );
 };
 
-export default AboutModal;
+export default PrivacyPoliceModal;
 
 const styles = StyleSheet.create({
   container: {

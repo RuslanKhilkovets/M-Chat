@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     width: '100%',
-    fontSize: 2,
+    fontSize: 32,
     fontFamily: 'Jersey20-Regular',
     textAlign: 'center',
     lineHeight: 26,

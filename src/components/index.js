@@ -13,3 +13,4 @@ export {default as Screen} from './containers/Screen';
 export {default as KeyboardScroll} from './containers/KeyboardScroll';
 
 export {default as AboutModal} from './modals/AboutModal';
+export {default as PrivacyPolicyModal} from './modals/PrivacyPolicyModal';

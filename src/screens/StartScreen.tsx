@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {AboutModal, Logo} from '@/components';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {useTheme} from '@/context/Theme/ThemeContext';
-import {Button} from '@/components';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
+
+import GoogleIcon from '@icons/GoogleIcon.svg';
+import {useTheme} from '@/context/Theme/ThemeContext';
+import {Button} from '@/components';
 
 export const StartScreen = () => {
   const [isAboutModalOpen, setIsAboutModalOpen] = React.useState(false);
@@ -41,7 +43,8 @@ export const StartScreen = () => {
         onPress={() => {}}
         type="primary"
         fullWidth
-        style={{marginTop: 100}}>
+        style={{marginTop: 100}}
+        before={<GoogleIcon />}>
         Sign in via Google
       </Button>
       <View style={{position: 'absolute', bottom: insets.bottom}}>

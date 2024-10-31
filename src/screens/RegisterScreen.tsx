@@ -3,15 +3,18 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Controller, useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
 import {yupResolver} from '@hookform/resolvers/yup';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {Input, KeyboardScroll, Screen} from '@/components';
+import {Input, KeyboardScroll, PrivacyPolicyModal, Screen} from '@/components';
 import {Button} from '@/components';
 import {useAuthMutation} from '@/hooks';
-import {AuthContext} from '@/context/Auth/AuthContext';
 import {Api} from '@/api';
 import registerSchema from '@/validations/register';
+import {useTheme} from '@/context/Theme/ThemeContext';
+import {AuthContext} from '@/context/Auth/AuthContext';
 
 export const LoginScreen = () => {
+  const [isPrivacyModalOpen, setIsPrivacyModalOpen] = React.useState(false);
   const [formErrors, setFormErrors] = React.useState<any>({
     email: '',
     password: '',
@@ -19,6 +22,8 @@ export const LoginScreen = () => {
     phone: '',
   });
   const {register} = React.useContext(AuthContext);
+  const {theme, colorScheme} = useTheme();
+  const insets = useSafeAreaInsets();
 
   const navigation = useNavigation();
   const {
@@ -120,10 +125,35 @@ export const LoginScreen = () => {
           </View>
 
           <Button onPress={handleSubmit(onSubmit)} type="primary" fullWidth>
-            Sign in
+            Register
           </Button>
         </KeyboardScroll>
       </View>
+      <View
+        style={{
+          position: 'absolute',
+          bottom: insets.bottom,
+          alignItems: 'center',
+          justifyContent: 'center',
+          flex: 1,
+          width: '100%',
+          left: 15,
+        }}>
+        <Text style={styles.text}>By registering, you accepting our </Text>
+        <TouchableOpacity
+          onPress={() => {
+            setIsPrivacyModalOpen(true);
+          }}
+          activeOpacity={0.7}>
+          <Text style={[styles.text, {color: 'blue'}]}>Privacy policy</Text>
+        </TouchableOpacity>
+      </View>
+      <PrivacyPolicyModal
+        title="Privacy policy"
+        openFrom="bottom"
+        visible={isPrivacyModalOpen}
+        onClose={() => setIsPrivacyModalOpen(false)}
+      />
     </Screen>
   );
 };
@@ -136,9 +166,9 @@ const styles = StyleSheet.create({
     gap: 20,
   },
   text: {
-    fontSize: 18,
+    fontSize: 20,
     fontFamily: 'Jersey20-Regular',
-    color: '##E1FF00',
+    color: '#E1FF00',
     textAlign: 'center',
   },
   screenLabel: {

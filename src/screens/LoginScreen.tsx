@@ -4,7 +4,7 @@ import {Controller, useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
 import {yupResolver} from '@hookform/resolvers/yup';
 
-import {Input, Logo, Screen} from '@/components';
+import {Input, Screen} from '@/components';
 import {Button} from '@/components';
 import {useAuthMutation} from '@/hooks';
 import {AuthContext} from '@/context/Auth/AuthContext';
@@ -92,7 +92,7 @@ export const LoginScreen = () => {
           )}
         />
         <TouchableOpacity onPress={onForgotPassword}>
-          <Text style={styles.text}>Забули пароль?</Text>
+          <Text style={styles.text}>Forget password?</Text>
         </TouchableOpacity>
         <Button onPress={handleSubmit(onSubmit)} type="primary" fullWidth>
           Sign in
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontFamily: 'Jersey20-Regular',
-    color: '##E1FF00',
+    color: '#E1FF00',
     textAlign: 'center',
   },
   screenLabel: {
