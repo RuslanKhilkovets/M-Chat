@@ -1,4 +1,5 @@
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
 
 /**
  * Metro configuration
@@ -17,8 +18,8 @@ const config = {
   resolver: {
     assetExts: assetExts.filter(ext => ext !== 'svg'),
     sourceExts: [...sourceExts, 'svg'],
+    // blacklistRE: exclusionList([/node_modules\/.*/]),
   },
-  maxWorkers: 2,
 };
 
 module.exports = mergeConfig(defaultConfig, config);

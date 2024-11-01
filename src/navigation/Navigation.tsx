@@ -10,6 +10,7 @@ import {IRoute} from '@/types';
 import {Logo} from '@/components';
 import {setUser} from '@/store/user';
 import {AuthContext} from '@/context/Auth/AuthContext';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -57,6 +58,10 @@ const Navigation = () => {
       setIsAuth(!!accessToken);
     }
   }, [accessToken]);
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
 
   if (loading) {
     return (
