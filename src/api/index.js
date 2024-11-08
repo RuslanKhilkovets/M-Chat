@@ -5,7 +5,7 @@ import {SERVER_URL} from '@env';
 import apiAuth from './auth';
 
 const client = axios.create({
-  baseURL: SERVER_URL,
+  baseURL: `${SERVER_URL}/api`,
 });
 
 client.interceptors.request.use(

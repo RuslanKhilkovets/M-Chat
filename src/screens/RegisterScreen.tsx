@@ -5,7 +5,13 @@ import {useNavigation} from '@react-navigation/native';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-import {Input, KeyboardScroll, PrivacyPolicyModal, Screen} from '@/components';
+import {
+  Input,
+  KeyboardScroll,
+  PhoneInput,
+  PrivacyPolicyModal,
+  Screen,
+} from '@/components';
 import {Button} from '@/components';
 import {useAuthMutation} from '@/hooks';
 import {Api} from '@/api';
@@ -20,6 +26,7 @@ export const LoginScreen = () => {
     password: '',
     name: '',
     phone: '',
+    token: '',
   });
   const {register} = React.useContext(AuthContext);
   const {theme, colorScheme} = useTheme();
@@ -38,6 +45,7 @@ export const LoginScreen = () => {
       password: '',
       name: '',
       phone: '',
+      token: '',
     },
   });
 
@@ -62,7 +70,7 @@ export const LoginScreen = () => {
   });
 
   const onSubmit = (data: any) => {
-    onRegister(data);
+    onRegister({...data, registerToken: data.token});
   };
 
   return (
@@ -73,6 +81,18 @@ export const LoginScreen = () => {
         </View>
         <KeyboardScroll>
           <View style={{gap: 20, paddingVertical: 20}}>
+            <Controller
+              control={control}
+              name="token"
+              render={({field: {onChange, value}}) => (
+                <Input
+                  placeholder="Access token"
+                  value={value}
+                  onChangeText={onChange}
+                  error={errors?.token?.message || formErrors?.token}
+                />
+              )}
+            />
             <Controller
               control={control}
               name="name"
@@ -89,10 +109,10 @@ export const LoginScreen = () => {
               control={control}
               name="phone"
               render={({field: {onChange, value}}) => (
-                <Input
+                <PhoneInput
                   placeholder="Phone"
                   value={value}
-                  onChangeText={onChange}
+                  onChange={onChange}
                   error={errors?.password?.message || formErrors?.password}
                 />
               )}
@@ -175,6 +195,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontFamily: 'Jersey20-Regular',
     color: '#E1FF00',
-    marginVertical: 70,
+    marginVertical: 50,
   },
 });

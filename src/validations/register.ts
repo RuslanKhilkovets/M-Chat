@@ -8,6 +8,7 @@ const registerSchema = yup.object().shape({
     .required('E-mail є обов’язковим'),
   name: yup.string().required("Ім'я є обов'язковим для введення"),
   password: yup.string().required('Пароль є обов’язковим'),
+  token: yup.string().required("Токен є обов'язковим"),
   phone: yup
     .string()
     .matches(regex.PHONE_INPUT)

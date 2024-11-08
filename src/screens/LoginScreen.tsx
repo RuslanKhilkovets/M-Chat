@@ -34,6 +34,7 @@ export const LoginScreen = () => {
 
   const onLoginSuccess = async (res: any) => {
     // TODO: add logic
+    console.log('Logged');
 
     reset();
     navigation.navigate('Main');

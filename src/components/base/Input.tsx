@@ -4,10 +4,11 @@ import {
   View,
   TextInput,
   Text,
+  TouchableOpacity,
   ViewStyle,
   TextStyle,
-  TouchableOpacity,
 } from 'react-native';
+import {TextInputMask} from 'react-native-masked-text';
 
 import {AppIcon} from '@/components';
 import {useTheme} from '@/context/Theme/ThemeContext';
@@ -24,6 +25,8 @@ interface IInputProps {
   error?: string;
   errorStyle?: TextStyle;
   disabled?: boolean;
+  mask?: string;
+  maskOptions?: Record<string, any>;
   maxLength?: number;
   searchMode?: boolean;
   endAdornment?: React.JSX.Element | null;
@@ -49,6 +52,8 @@ const Input: React.FC<IInputProps> = ({
   labelStyle,
   error,
   disabled = false,
+  mask,
+  maskOptions,
   maxLength,
   searchMode,
   endAdornment,
@@ -77,36 +82,62 @@ const Input: React.FC<IInputProps> = ({
           disabled && styles.disabled,
           multiline && {height: numberOfLines * 25},
         ]}>
-        <TextInput
-          ref={ref}
-          textAlignVertical="top"
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
-          secureTextEntry={showPassword}
-          editable={!disabled}
-          maxLength={maxLength}
-          numberOfLines={numberOfLines}
-          multiline={multiline}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          keyboardType={keyboardType}
-          style={[
-            styles.input,
-            inputStyle,
-            multiline && {height: numberOfLines * 20},
-            disabled && styles.disabled,
-            error && styles.errorText,
-          ]}
-        />
+        {mask ? (
+          <TextInputMask
+            placeholderTextColor={theme[colorScheme].dark}
+            type={'custom'}
+            options={{
+              mask,
+              ...maskOptions,
+            }}
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            editable={!disabled}
+            maxLength={maxLength}
+            numberOfLines={numberOfLines}
+            multiline={multiline}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            keyboardType={keyboardType}
+            style={[
+              styles.input,
+              inputStyle,
+              isFocused && styles.activeInput,
+              disabled && styles.disabled,
+            ]}
+          />
+        ) : (
+          <TextInput
+            placeholderTextColor={theme[colorScheme].dark}
+            ref={ref}
+            textAlignVertical="top"
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            secureTextEntry={showPassword}
+            editable={!disabled}
+            maxLength={maxLength}
+            numberOfLines={numberOfLines}
+            multiline={multiline}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            keyboardType={keyboardType}
+            style={[
+              styles.input,
+              inputStyle,
+              multiline && {height: numberOfLines * 20},
+            ]}
+          />
+        )}
         {endAdornment && (
           <View style={styles.endAdornment}>{endAdornment}</View>
         )}
-        {secureTextEntry && (
+        {secureTextEntry && !mask && (
           <TouchableOpacity
             style={styles.endAdornment}
             onPress={handleTogglePasswordVisibility}>
-            <AppIcon name={!showPassword ? 'hide' : 'see'} color="#E1FF00" />
+            <AppIcon name={!showPassword ? 'hide' : 'see'} />
           </TouchableOpacity>
         )}
         {searchMode && (
